@@ -1,0 +1,37 @@
+# ─────────────────────────────────────────────
+# Climate-Resilient Crop Yield Prediction
+# Python Dependencies
+# ─────────────────────────────────────────────
+
+# Core data science
+numpy>=1.23.0
+pandas>=1.5.0
+scipy>=1.9.0
+
+# Machine learning
+scikit-learn>=1.2.0
+xgboost>=1.7.0
+
+# Deep learning (optional but recommended)
+tensorflow>=2.11.0
+# OR: torch>=2.0.0  (PyTorch alternative)
+
+# Visualization
+matplotlib>=3.6.0
+seaborn>=0.12.0
+plotly>=5.13.0          # For interactive charts
+
+# Notebook support
+jupyter>=1.0.0
+ipykernel>=6.0.0
+
+# Configuration
+pyyaml>=6.0
+
+# Utilities
+tqdm>=4.64.0            # Progress bars
+joblib>=1.2.0           # Model serialization
+python-dotenv>=0.21.0   # Environment variables
+
+# Testing
+pytest>=7.2.0

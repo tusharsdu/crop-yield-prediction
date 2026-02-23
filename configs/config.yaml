@@ -1,0 +1,75 @@
+# ─────────────────────────────────────────────────────────────────
+# Climate-Resilient Crop Yield Prediction System
+# Configuration File — configs/config.yaml
+# ─────────────────────────────────────────────────────────────────
+
+# ── Data ──────────────────────────────────────────────────────────
+data:
+  faostat_path:  "data/raw/faostat_crop_yield.csv"
+  climate_path:  "data/raw/india_climate_data.csv"
+  processed_path: "data/processed/merged_features.csv"
+  target_crop:   "rice"          # rice | wheat
+  target_col:    "yield_rice"
+  start_year:    1983
+  train_split:   0.80            # 80% train, 20% test
+
+# ── Feature Engineering ───────────────────────────────────────────
+features:
+  lag_years:     [1, 2, 3]       # Lag windows for climate & yield
+  rolling_windows: [3, 5]        # Rolling mean windows
+  drought_threshold: 0.75        # Fraction of mean rainfall = drought
+  flood_threshold:   1.40        # Fraction of mean rainfall = flood
+  heat_stress_temp:  28.0        # °C above which temp_stress = 1
+
+# ── LSTM Model ────────────────────────────────────────────────────
+lstm:
+  sequence_length:  5            # Years of history per input sequence
+  units:           [128, 64, 32] # LSTM units per layer
+  dropout:         [0.25, 0.20, 0.15]
+  dense_units:     [32, 16]
+  loss:            "huber"
+  optimizer:       "adam"
+  learning_rate:   0.001
+  batch_size:      8
+  epochs:          150
+  early_stopping_patience: 15
+  reduce_lr_patience:      7
+  reduce_lr_factor:        0.5
+  min_lr:                  0.000001
+
+# ── Random Forest ─────────────────────────────────────────────────
+random_forest:
+  n_estimators:    300
+  max_depth:       8
+  min_samples_leaf: 2
+  max_features:    "sqrt"
+  random_state:    42
+  n_jobs:          -1
+
+# ── XGBoost ───────────────────────────────────────────────────────
+xgboost:
+  n_estimators:    300
+  learning_rate:   0.05
+  max_depth:       5
+  subsample:       0.80
+  colsample_bytree: 0.80
+  reg_alpha:       0.1
+  reg_lambda:      1.0
+  random_state:    42
+
+# ── Forecast ──────────────────────────────────────────────────────
+forecast:
+  n_future_years: 10
+  scenarios:
+    business_as_usual:
+      temp_delta_per_year: 0.04   # °C increase per year
+      rain_delta_per_year: -2.0   # mm decrease per year
+    climate_stress:
+      temp_delta_per_year: 0.08
+      rain_delta_per_year: -5.0
+
+# ── Output Paths ──────────────────────────────────────────────────
+output:
+  plots_dir:  "outputs/plots"
+  models_dir: "outputs/models"
+  dpi:        150

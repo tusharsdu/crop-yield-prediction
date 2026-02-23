@@ -70,7 +70,7 @@ crop-yield-prediction/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/crop-yield-prediction.git
+git clone https://github.com/tusharsdu/crop-yield-prediction.git
 cd crop-yield-prediction
 ```
 
@@ -190,10 +190,12 @@ pytest tests/test_pipeline.py -v
 ---
 
 ## 👥 Team
-## Tushar Gorad
-## Uhana 
-## Barath
-
 **AAI-530 Group 4**
+
+- Tushar Gorad
+- Uhana Jyothi
+- Bharath
+
+
 
 ---

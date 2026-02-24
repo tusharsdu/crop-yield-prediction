@@ -194,7 +194,7 @@ pytest tests/test_pipeline.py -v
 
 - Tushar Gorad
 - Uhana Jyothi
-- Bharath
+- Bharath TS
 
 
 
